@@ -1,11 +1,16 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/', 'HomeController@index')->name('home');
+Route::get('/configuration', [UserController::class, 'config'])->name('config');
+Route::post('/user/update', [UserController::class, 'update'])->name('user.update');
 
 Route::get('/dashboard', function () {
     return view('dashboard');

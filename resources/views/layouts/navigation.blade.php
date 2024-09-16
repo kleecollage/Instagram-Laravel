@@ -15,6 +15,12 @@
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('dashboard')" :active="request()->routeIs('home')">
+                        {{ __('Home') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('dashboard')" :active="request()->routeIs('home')">
+                        {{ __('Upload Image') }}
+                    </x-nav-link>
                 </div>
             </div>
 
@@ -34,6 +40,11 @@
                     </x-slot>
 
                     <x-slot name="content">
+
+                        <x-dropdown-link :href="route('config')">
+                            {{ __('Account') }}
+                        </x-dropdown-link>
+
                         <x-dropdown-link :href="route('profile.edit')">
                             {{ __('Profile') }}
                         </x-dropdown-link>
