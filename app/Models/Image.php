@@ -11,10 +11,10 @@ class Image extends Model
 
     protected $table = 'images';
     // Relation 1:N
-    public function comments()
-    {
-        return $this->hasMany('App\Models\Comment');
-    }
+        public function comments()
+        {
+            return $this->hasMany('App\Models\Comment');
+        }
     // Relation 1:N
     public function likes()
     {

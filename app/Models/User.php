@@ -44,7 +44,7 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
-
+    // Relation 1:N
     protected function images() {
         return $this->hasMany('App\Models\Image');
     }
