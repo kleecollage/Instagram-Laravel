@@ -13,7 +13,7 @@ class Image extends Model
     // Relation 1:N
         public function comments()
         {
-            return $this->hasMany('App\Models\Comment');
+            return $this->hasMany('App\Models\Comment')->orderBy('created_at', 'desc');
         }
     // Relation 1:N
     public function likes()
