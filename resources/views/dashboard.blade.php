@@ -11,26 +11,27 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900 flex flex flex-col items-center space-y-4">
                     @include('includes.message')
-                    @foreach($images as $image)
-                        <a href="{{ route('image.detail', ['id' => $image->id]) }}">
+                        @foreach($images as $image)
                             <div class="card  w-full max-w-3xl pub-image">
-                                <div class="card-header">
-                                    @if($image->user->image)
-                                        <div class="container-avatar">
-                                            <img src="{{ route('user.avatar',['filename' => $image->user->image]) }}"
-                                                 class="avatar" alt="user-avatar"/>
+                                <a href="{{ route('image.detail', ['id' => $image->id]) }}">
+                                    <div class="card-header">
+                                        @if($image->user->image)
+                                            <div class="container-avatar">
+                                                <img src="{{ route('user.avatar',['filename' => $image->user->image]) }}"
+                                                     class="avatar" alt="user-avatar"/>
+                                            </div>
+                                        @else
+                                            <div class="container-avatar">
+                                                <img src="{{ asset('images/default-avatar.png') }}" alt="default"
+                                                     class="avatar">
+                                            </div>
+                                        @endif
+                                        <div class="data-user">
+                                            {{ $image->user->name.' '.$image->user->surname }}
+                                            <span class="nickname">{{ '@'.$image->user->nick }}</span>
                                         </div>
-                                    @else
-                                        <div class="container-avatar">
-                                            <img src="{{ asset('images/default-avatar.png') }}" alt="default"
-                                                 class="avatar">
-                                        </div>
-                                    @endif
-                                    <div class="data-user">
-                                        {{ $image->user->name.' '.$image->user->surname }}
-                                        <span class="nickname">{{ '@'.$image->user->nick }}</span>
                                     </div>
-                                </div>
+                                </a>
                                 <div class="card-body">
                                     <div class="image-container">
                                         <img src="{{ route('image.file', ['filename' => $image->image_path]) }}"
@@ -53,20 +54,19 @@
                                         @endforeach
                                         @if($user_like)
                                             <img src="{{ asset('images/heart-icon-red.png') }}" alt="heart-icon"
-                                                 class="btn-like">
+                                                 class="btn-like" data-id="{{ $image->id }}">
                                         @else
                                             <img src="{{ asset('images/heart-icon.png') }}" alt="heart-icon"
-                                                 class="btn-dislike">
+                                                 class="btn-dislike" data-id="{{ $image->id }}">
                                         @endif
                                         <span class="number-likes">{{ count($image->likes) }}</span>
                                         <a href="{{ route('image.detail', ['id' => $image->id]) }}"
-                                           class="btn btn-sm btn-warning btn-comments">
+                                           class="btn btn-sm btn-warning btn-comments" data-id="{{ $image->id }}">
                                             Comentarios {{ count($image->comments) }}
                                         </a>
                                     </div>
                                 </div>
                             </div>
-                        </a>
                     @endforeach
                 </div>
                 {{--PAGINACION--}}

@@ -111,6 +111,7 @@ form .avatar{
 .number-likes{
     color: gray;
     font-size:  15px;
+    margin-right: 65%;
 }
 
 .comment{
