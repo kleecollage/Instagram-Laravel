@@ -11,16 +11,9 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
             <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
                 <div class="max-w-xl mx-auto">
-
-                    @if(session('message'))
-                        <div class="alert alert-success">
-                            {{session('message')}}
-                        </div>
-                    @endif
-
-                    <form method="POST" action="{{route('user.update')}}" aria-label="Account configuration">
+                    @include('includes.message')
+                    <form method="POST" action="{{route('user.update')}}" enctype="multipart/form-data" aria-label="Account configuration">
                         @csrf
-
                         <!-- Name -->
                         <div>
                             <x-input-label for="name" :value="__('Name')"/>
@@ -51,6 +44,16 @@
                             <x-text-input id="email" class="block mt-1 w-full" type="email" name="email"
                                           :value="Auth::user()->email" required autocomplete="username"/>
                             <x-input-error :messages="$errors->get('email')" class="mt-2"/>
+                        </div>
+
+                        <!-- User Avatar -->
+                        <div class="mt-4">
+                            <x-input-label for="image_path" :value="__('Avatar')"/>
+                            <div class="col-md-6">
+                                @include('includes.avatar')
+                            </div>
+                            <x-text-input id="image_path" class="block mt-1 w-full" type="file" name="image_path"/>
+                            <x-input-error :messages="$errors->get('image_path')" class="mt-2"/>
                         </div>
 
                         <div class="flex items-center justify-end mt-4">
