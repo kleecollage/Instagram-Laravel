@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ImageController;
@@ -9,9 +10,9 @@ use Illuminate\Support\Facades\Route;
     return view('welcome');
 });*/
 
-Route::get('/', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('home');
+Route::get('/', [HomeController::class, 'index'])
+    ->name('home')
+    ->middleware(['auth', 'verified']);
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -24,6 +25,7 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/upload-image', [ImageController::class, 'create'])->name('image.create');
     Route::post('/image/save', [ImageController::class, 'save'])->name('image.save');
+    Route::get('/image/file/{filename}', [ImageController::class, 'getImage'])->name('image.file');
 });
 
 require __DIR__.'/auth.php';

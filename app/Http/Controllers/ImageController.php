@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Image;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\File;
@@ -43,5 +44,10 @@ class ImageController extends Controller
         return redirect()->route('home')->with([
             'message' => 'Image uploaded successfully!'
         ]);
+    }
+
+    public function getImage($filename) {
+        $file = Storage::disk('images')->get($filename);
+        return new Response($file, 200);
     }
 }
