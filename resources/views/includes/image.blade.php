@@ -1,6 +1,6 @@
 @php use App\Helpers\FormatTime;use Illuminate\Support\Facades\Auth; @endphp
 <div class="card  w-full max-w-3xl pub-image">
-    <a href="{{ route('image.detail', ['id' => $image->id]) }}">
+    <a href="{{ route('profile', ['id' => $image->user->id]) }}">
         <div class="card-header">
             @if($image->user->image)
                 <div class="container-avatar">

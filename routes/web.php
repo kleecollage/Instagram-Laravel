@@ -17,9 +17,9 @@ Route::get('/', [HomeController::class, 'index'])
     ->middleware(['auth', 'verified']);
 
 Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+/*    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');*/
 
     Route::get('/configuration', [UserController::class, 'config'])->name('config');
     Route::post('/user/update', [UserController::class, 'update'])->name('user.update');
@@ -36,6 +36,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/like/{image_id}', [LikeController::class, 'like'])->name('like.save');
     Route::get('/dislike/{image_id}', [LikeController::class, 'dislike'])->name('like.delete');
     Route::get('/likes', [LikeController::class, 'index'])->name('likes');
+
+    Route::get('/profile/{id}', [UserController::class, 'profile'])->name('profile');
 
 });
 
