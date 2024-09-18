@@ -29,6 +29,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/image/save', [ImageController::class, 'save'])->name('image.save');
     Route::get('/image/file/{filename}', [ImageController::class, 'getImage'])->name('image.file');
     Route::get('/image/{id}', [ImageController::class, 'detail'])->name('image.detail');
+    Route::get('image/delete/{id}', [ImageController::class, 'delete'])->name('image.delete');
 
     Route::post('comment/save', [CommentController::class, 'save'])->name('comment.save');
     Route::get('/comment/delete/{id}', [CommentController::class, 'delete'])->name('comment.delete');
@@ -38,6 +39,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/likes', [LikeController::class, 'index'])->name('likes');
 
     Route::get('/profile/{id}', [UserController::class, 'profile'])->name('profile');
+
 
 });
 

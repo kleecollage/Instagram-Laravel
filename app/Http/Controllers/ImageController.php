@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Comment;
+use App\Models\Like;
 use Illuminate\Http\Request;
 use App\Models\Image;
 use Illuminate\Http\Response;
@@ -55,5 +57,35 @@ class ImageController extends Controller
         $image = Image::find($id);
 
         return view('image.detail', ['image' => $image]);
+    }
+
+    public function delete($id){
+        $user = Auth::user();
+        $image = Image::find($id);
+        $comments = Comment::where('image_id', $id)->get();
+        $likes = Like::where('image_id', $id)->get();
+
+        if ($user && $image && $image->user->id == $user->id) {
+            // Eliminar Comentario
+            if ($comments && count($comments) > 0) {
+                foreach ($comments as $comment) {
+                    $comment->delete();
+                }
+            }
+            // Eliminar Likes
+            if ($likes && count($likes) > 0) {
+                foreach ($likes as $like) {
+                    $like->delete();
+                }
+            }
+            // Eliminar ficheros de la imagen
+            Storage::disk('images')->delete($image->image_path);
+            // Eliminar Registro de Imagen
+            $image->delete();
+            $message = array('message' => 'Image deleted successful');
+        } else {
+            $message = array('message' => 'Image deletion failed!');
+        }
+        return redirect()->route('home')->with($message);
     }
 }

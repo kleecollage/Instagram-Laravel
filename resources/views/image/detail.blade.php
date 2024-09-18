@@ -87,6 +87,31 @@
                                     </div>
                                 @endforeach
                             </div>
+                            @if(Auth::user() && Auth::user()->id == $image->user_id)
+                                <div class="actions">
+                                    <a href="" class="btn btn-sm btn-primary">Edit</a>
+                                    <a href="" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#modal">Delete</a>
+                                </div>
+
+                                {{--MODAL--}}
+                                <div class="modal fade" id="modal" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h1 class="modal-title fs-5" id="modalLabel">Surely you want to delete?</h1>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                If you delete this file it will not be able to be recovered by us
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                <a href="{{ route('image.delete', ['id'=>$image->id]) }}" class="btn btn-danger">Delete Permanently </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endif
                         </div>
                     </div>
                 </div>

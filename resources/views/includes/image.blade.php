@@ -52,5 +52,6 @@
                 Comentarios {{ count($image->comments) }}
             </a>
         </div>
+
     </div>
 </div>
