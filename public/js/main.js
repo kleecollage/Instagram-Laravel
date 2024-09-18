@@ -1,4 +1,5 @@
 var url = "http://127.0.0.1:8000";
+
 window.addEventListener('load',  function () {
     $('.btn-like').css('cursor', 'pointer');
     $('.btn-dislike').css('cursor', 'pointer');
@@ -42,4 +43,10 @@ window.addEventListener('load',  function () {
         })
     }
     dislike();
+
+    // BUSCADOR
+    $('#buscador').submit(function(e){
+        $(this).attr('action', url + '/profiles/' + $('#buscador #search').val());
+    })
+
 });
