@@ -8,6 +8,15 @@ use Illuminate\Support\Facades\Auth;
 
 class LikeController extends Controller
 {
+
+    public function index(){
+        $user = Auth::user();
+        $likes = Like::where('user_id', $user->id)
+            ->orderBy('id', 'desc')
+            ->paginate(5);
+        return view('likes.index', ['likes' => $likes]);
+    }
+
     public function like($image_id){
         // recoger datos de usuatio y la imagen
         $user = Auth::user();
@@ -51,4 +60,5 @@ class LikeController extends Controller
             ]);
         }
     }
+
 }

@@ -18,6 +18,9 @@
                     <x-nav-link :href="route('image.create')" :active="request()->routeIs('image.create')">
                         {{ __('Upload Image') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('likes')" :active="request()->routeIs('likes')">
+                        {{ __('Likes') }}
+                    </x-nav-link>
                 </div>
             </div>
 
